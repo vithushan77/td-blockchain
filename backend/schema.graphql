@@ -4,3 +4,11 @@ type Transfer @entity {
   to: String! @index
   value: BigInt!
 }
+
+type Token @entity {
+  id: ID!
+  name: String! @index
+  symbol: String! @index
+  decimals: BigInt!
+  totalSupply: BigInt!
+}
