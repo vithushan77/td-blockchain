@@ -1,3 +1,11 @@
+type Token @entity {
+  id: ID!
+  name: String! @index
+  symbol: String! @index
+  decimals: BigInt!
+  totalSupply: BigInt!
+}
+
 type Transfer @entity {
   id: ID!
   from: String! @index
@@ -5,10 +13,21 @@ type Transfer @entity {
   value: BigInt!
 }
 
-type Token @entity {
+type Balance @entity {
   id: ID!
-  name: String! @index
-  symbol: String! @index
-  decimals: BigInt!
-  totalSupply: BigInt!
+  tokenId: ID! @index
+  balance: BigInt!
+}
+
+type Metrics @entity {
+  id: ID!
+  totalTransfers: Int!
+  uniqueHolders: Int!
+}
+
+type Query {
+  token(id: ID!): Token
+  transfers: [Transfer!]!
+  balance(address: String!, tokenId: String!): Balance
+  metrics(id: ID!): Metrics
 }
